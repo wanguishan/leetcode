@@ -24,7 +24,6 @@ class Solution:
         for index, char in enumerate(s):
             if char in usedChar and start <= usedChar[char]:
                 start = usedChar[char] + 1
-            else:
-                maxLength = max(maxLength, index-start+1)
             usedChar[char] = index
+            maxLength = max(maxLength, index-start+1)
         return maxLength
