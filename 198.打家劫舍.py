@@ -11,7 +11,7 @@ Created on Tue Jul 31 17:52:10 2018
 输出: 4
 解释: 偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。
      偷窃到的最高金额 = 1 + 3 = 4 。
-     
+
 示例 2:
 输入: [2,7,9,3,1]
 输出: 12
@@ -24,15 +24,18 @@ class Solution:
         """
         :type nums: List[int]
         :rtype: int
+        动态规划: f(n) = max(f(n-1), f(n-2)+nums[n])
         """
         if not nums:
             return 0
         if len(nums) == 1:
             return nums[0]
-        
-        dp = [0 for _ in range(len(nums))]    #dp = [0] * len(nums)
-        dp[0] = nums[0]
-        dp[1] = max(nums[1], nums[0])
-        for num in range(2, len(nums)):
-            dp[num] = max(dp[num-1], dp[num-2] + nums[num])
-        return dp[len(nums)-1]
+        maxMoney = [0] * len(nums)
+        maxMoney[0] = nums[0]
+        maxMoney[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            maxMoney[i] = max(nums[i]+maxMoney[i-2], maxMoney[i-1])
+        return maxMoney[-1]
+
+if __name__ == '__main__':
+    print(Solution().rob([2,7,9,3,1]))

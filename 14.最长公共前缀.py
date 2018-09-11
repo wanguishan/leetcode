@@ -21,33 +21,34 @@ class Solution:
         :type strs: List[str]
         :rtype: str
         """
-        prefix = ""
+        res = ''
         i = 0
         while True:
             try:
                 temp = strs[0][i]
-                for item in strs:
-                    if item[i] != temp:
-                        return prefix
+                for str in strs:
+                    if str[i] != temp:
+                        return res
             except:
-                return prefix
-            prefix += temp
+                return res
             i += 1
-            
-        return prefix
-    
-    
+            res += temp
+        return res
+
+
     def longestCommonPrefix_2(self, strs):
         """
         :type strs: List[str]
         :rtype: str
         """
         if not strs:
-            return ""
-        shortest = min(strs,key=len)
+            return ''
+        shortest = min(strs, key=len)    ## shortest = sorted(strs, key=len)[0]
         for i, ch in enumerate(shortest):
-            for other in strs:
-                if other[i] != ch:
+            for str in strs:
+                if str[i] != ch:
                     return shortest[:i]
         return shortest
-        
+
+
+

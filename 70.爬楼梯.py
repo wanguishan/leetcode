@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Created on Tue Jul 31 15:03:00 2018
 爬楼梯：
@@ -28,7 +28,21 @@ class Solution:
         :type n: int
         :rtype: int
         """
-        f0, f1 = 0, 1
+        a, b = 1, 1
         for _ in range(n):
-            f0, f1 = f1,f0 + f1
-        return f1
+            a, b = b, a + b
+        return a
+
+
+    def climbStairs_2(self, n):
+        """
+	动态规划法 f(n) = f(n-1) + f(n-2)
+	"""
+        if n == 1: return 1
+        if n == 2: return 2
+        dp = [0] * (n+1)
+        dp[1] = 1
+        dp[2] = 2
+        for i in range(3, n+1):
+            dp[i] = dp[i-1] + dp[i-2]
+        return dp[n]
